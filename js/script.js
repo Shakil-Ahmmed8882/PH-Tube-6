@@ -5,15 +5,12 @@ const getData = async (id = 1000) => {
     `https://openapi.programming-hero.com/api/videos/category/${id}`
   );
   const data = await res.json();
-  const category = data.data;
+  let category = data.data;
 
   //`Display card invocation
   displayCards(category);
   //   when no content available
   ZeroContent(category.length <= 0);
-  // seconds to hours and minutes conversion
-  console.log(category);
-  console.log(category[2].others.posted_date);
 };
 
 // displaying feature buttons
@@ -39,9 +36,20 @@ async function showTabButtons() {
     .join("");
 }
 
+// ===========================
+
+// //is Data is sorted?
+// let isSorted = false;
+
+// function sortData(isSorted) {
+//   isSorted = true;
+// }
+
+// ========================
 showTabButtons();
 // Display cards function
 function displayCards(data) {
+//   data = customSortData(data);
   const cardContainer = document.querySelector("[card-container]");
 
   cardContainer.innerHTML = data
@@ -107,7 +115,7 @@ function displayCards(data) {
 getData();
 
 function ZeroContent(isTrue) {
-const noContentParent = document.querySelector("[data-no-content]");
+  const noContentParent = document.querySelector("[data-no-content]");
   if (isTrue) {
     noContentParent.innerHTML = `
     <img src="./Icon.png" class=" w-[40%] sm:w-[100px] lg:w-[12%]" />
@@ -116,7 +124,7 @@ const noContentParent = document.querySelector("[data-no-content]");
       Oops!! Sorry, There is no content here
     </h1>    
     `;
-  } else{
-      noContentParent.innerHTML = ''
+  } else {
+    noContentParent.innerHTML = "";
   }
 }
