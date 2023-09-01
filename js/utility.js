@@ -28,6 +28,8 @@ function customSortData(array) {
 }
 
 
+
+
 // function sorting(dataArr,isSorted){
 //     // Sorting the content
 //     let sortedArr;

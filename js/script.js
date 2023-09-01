@@ -9,34 +9,36 @@ function sortData(target) {
   isSorted = !isSorted; // Toggle the value of isSorted
 
   if (isSorted) {
-    target.classList.remove("bg-primary");
-    target.classList.add("bg-red-400");
-    target.classList.add("text-white");
+    // target.classList.toggle("bg-primary");
+    target.classList.toggle("bg-red-500");
+    target.classList.remove("text-black");
 
+    // Check if text color is not white before setting it
+    if (!target.classList.contains("text-white")) {
+      target.classList.add("text-white");
+    }
+    // selecting button parent
     const buttonContainerToSort = document.querySelector(
       "[data-btn-container]"
     );
-    
-    // Define a click event handler for the button container
+
+    // Event delegation for click handling
     buttonContainerToSort.addEventListener("click", function (e) {
       if (e.target && e.target.id) {
-        clickedId = e.target.id; // Store the clicked id
-        // Call getData with the clicked id
+        clickedId = e.target.id;
         getData(clickedId);
       }
     });
   } else {
-    target.classList.remove("bg-red-400");
-    target.classList.add("bg-primary");
+    target.classList.remove("bg-red-500");
+    target.classList.add("text-black");
   }
 
   // Call getData with the stored clicked id
-  clickedId = clickedId == ""?1000: clickedId;
+  clickedId = clickedId == "" ? 1000 : clickedId;
 
-  getData(clickedId)
+  getData(clickedId);
 }
-
-
 
 const getData = async (id = 1000) => {
   // getting data from network request
@@ -70,7 +72,7 @@ async function showTabButtons() {
   buttonContainer.innerHTML = buttons
     .map((button) => {
       return `
-      <button id="${button.category_id}" onclick="getData('${button.category_id}')"class=" border-none btn  hover:bg-black md:text-black hover:text-white text-white bg-primary">${button.category}</button>
+      <button id="${button.category_id}" onclick="getData('${button.category_id}')"class="  md:btn  hover:bg-black md:text-black rounded-lg hover:text-white md:px-5 md:py-3 md:-border-[10px] text-white font-bold md:font-normal bg-primary">${button.category}</button>
       `;
     })
     .join("");
@@ -163,13 +165,26 @@ function showMenuBar() {
   // element.style.display = " grid";
   element.classList.toggle("hidden");
   element.classList.toggle("grid");
-  element.classList.toggle("w-[80%]");
-  const xx = document.querySelector("[data-i]");
-  xx.classList.toggle("text-white");
+  element.classList.add("sm:w-[60%]");
+  element.classList.add("w-[100%]");
 }
 
 function showMenuItem() {
   var container = document.querySelector("[data-btn-container]");
+  var clickableImg = document.querySelector("[data-stacked]");
+
+  function toggleImageSrc() {
+    const img = clickableImg;
+    if (
+      img.src === "https://img.icons8.com/?size=512&id=c_bKk61RMFLX&format=png"
+    ) {
+      img.src = "https://img.icons8.com/?size=512&id=9JZ2d8m_PeKK&format=png"; // Set to an empty string or the new source URL
+    } else {
+      img.src = "https://img.icons8.com/?size=512&id=c_bKk61RMFLX&format=png"; // Set to the original source URL
+    }
+  }
+  toggleImageSrc();
+
   container.classList.toggle("hidden");
   container.classList.toggle("grid");
 }

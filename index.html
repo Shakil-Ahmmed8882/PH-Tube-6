@@ -39,7 +39,8 @@
         background: rgba(37, 37, 37, 0.2);
       }
       .round {
-        border-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
       }
 
       img{
@@ -51,7 +52,7 @@
   </head>
   <body>
     <!-- header -->
-    <header data-header class="px-1 pb-20 md:px-16 md:py-10 ]">
+    <header data-header class="px-1 pb-20 md:pb-16 md:px-16 md:py-6 ]">
       <nav
         data-nav
         class=" grid grid-cols-3 items-center w-[100%] shadow-lg md:shadow-none px-3 md:px-0 py-3 bg-white z-[999] gap-y-5 fixed md:relative top-0 h-12 md:pt-2">
@@ -59,8 +60,8 @@
         <i
           onclick="showMenuBar()"
           data-i
-          class="block cursor-pointer text-3xl z-[9999999] fixed top-1 right-4 font-bold md:hidden fa-solid fa-bars"></i>
-        <!-- nav buttonsw -->
+          class="block text-black cursor-pointer text-[28px] z-[9999999] fixed top-3 right-4  md:hidden fa-solid fa-bars"></i>
+        <!-- nav buttons -->
           <button 
             onclick="sortData(this)"
             class="bg-primary hidden justify-self-center md:flex px-5 py-3 rounded-lg">
@@ -72,21 +73,21 @@
           </button>
 
         <!-- menu buttons -->
-        <div class="grid grid-cols-1 divide-y">
+
           <div
             data-menu-container
-            class="fixed round top-[0px] hidden right-0 bg-[#000000c0] w-[100%]  transition duration-500 ease-in-out h-[40vh] z-[99999]">
+            class="fixed round top-[0px] hidden right-0 bg-[#f3558f] w-[100%]  transition duration-500 ease-in-out h-[40vh] z-[99999] shadow-lg">
+            <!-- sort button -->
+            <button 
+            onclick="sortData(this)"
+            class="justify-self-center md:flex w-[100%] px-5 py-3 font-bold rounded-lg  hover:bg-[#7c5dfadf] transition-all">
+            Sort by view
+          </button>
             <button
-              onclick="sortData()"
-              class="w-[100%] text-white font-bold hover:bg-[#7c5dfadf] transition-all">
-              Sort by view
-            </button>
-            <button
-              class="block w-[100%] text-white font-bold hover:bg-[#7c5dfadf] transition-all">
+              class="block w-[100%] font-bold hover:bg-[#7c5dfadf] transition-all">
               <a href="./Blog.html" target="_blank">Blog</a>
             </button>
           </div>
-        </div>
       </nav>
     </header>
 
@@ -95,12 +96,13 @@
       <div>
         <div
           data-btn-container
-          class="text-center mb-10 fixed md:static bg-[#2825279a] md:bg-transparent overflow-hidden h-[80vh] md:h-auto ml-auto w-[100%] sm:w-[70%] md:w-[100%] top-11 pt-6 right-0 md:block z-20 space-x-4 font-bold text-1xl text-white hidden"></div>
+          class="text-center round mb-10 fixed md:static bg-[#232323ef] md:bg-transparent overflow-hidden h-[50vh] md:h-auto ml-auto w-[100%] sm:w-[70%] md:w-[100%] top-11 pt-1 right-0 md:block z-20 space-x-4 font-bold text-1xl text-white hidden"></div>
         <div>
+          
           <img
-            onclick="showMenuItem()"
-            class="block cursor-pointer text-3xl z-50 fixed top-[55px] w-[40px] right-1 font-bold md:hidden"
-            src="https://img.icons8.com/?size=512&id=TDp6fE6jbWH3&format=png"
+            onclick="showMenuItem()" data-stacked title="Categories"
+            class="block  cursor-pointer text-3xl z-[9999999] fixed top-[7px] w-[35px] right-[48px] font-bold md:hidden"
+            src="https://img.icons8.com/?size=512&id=9JZ2d8m_PeKK&format=png"
             alt="" />
       </div>
 
