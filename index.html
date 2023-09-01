@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assignment-6</title>
+    <!-- font awesome cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
     <!-- Daisy Ui CDN -->
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css"
@@ -31,25 +38,71 @@
       .primary-btn {
         background: rgba(37, 37, 37, 0.2);
       }
+      .round {
+        border-radius: 10px;
+      }
+
+      img{
+        position: relative;
+        z-index: -3;
+      }
+
     </style>
   </head>
   <body>
     <!-- header -->
-    <header data-header>
+    <header data-header class="px-1 pb-20 md:px-16 md:py-10 ]">
       <nav
         data-nav
-        class="flex flex-wrap gap-y-5 justify-around items-center h-20 pt-10 md:pt-2">
-        <div><img src="./Logo.png" class="w-40" alt="" /></div>
-        <button onclick="sortData()" class="bg-primary px-5 py-2 rounded-lg">Sort by view</button>
-        <button class="bg-red-400 text-white px-5 py-2 rounded-lg"><a href="./Blog.html">Blog</a></button>
+        class=" grid grid-cols-3 items-center w-[100%] shadow-lg md:shadow-none px-3 md:px-0 py-3 bg-white z-[999] gap-y-5 fixed md:relative top-0 h-12 md:pt-2">
+        <div class=""><img src="./Logo.png" class="w-[120px] md:w-40" alt="" /></div>
+        <i
+          onclick="showMenuBar()"
+          data-i
+          class="block cursor-pointer text-3xl z-[9999999] fixed top-1 right-4 font-bold md:hidden fa-solid fa-bars"></i>
+        <!-- nav buttonsw -->
+          <button 
+            onclick="sortData(this)"
+            class="bg-primary hidden justify-self-center md:flex px-5 py-3 rounded-lg">
+            Sort by view
+          </button>
+          <button
+            class="bg-red-400 text-white justify-self-end w-[150px] hidden md:flex px-3 py-3 text-center rounded-lg">
+            <a class=" mx-auto" href="./Blog.html" target="_blank">Blog</a>
+          </button>
+
+        <!-- menu buttons -->
+        <div class="grid grid-cols-1 divide-y">
+          <div
+            data-menu-container
+            class="fixed round top-[0px] hidden right-0 bg-[#000000c0] w-[100%]  transition duration-500 ease-in-out h-[40vh] z-[99999]">
+            <button
+              onclick="sortData()"
+              class="w-[100%] text-white font-bold hover:bg-[#7c5dfadf] transition-all">
+              Sort by view
+            </button>
+            <button
+              class="block w-[100%] text-white font-bold hover:bg-[#7c5dfadf] transition-all">
+              <a href="./Blog.html" target="_blank">Blog</a>
+            </button>
+          </div>
+        </div>
       </nav>
     </header>
 
     <!-- main -->
     <main class="px-1 md:p-16">
-      <div
-        data-btn-container
-        class="text-center space-y-3 pb-8 space-x-4"></div>
+      <div>
+        <div
+          data-btn-container
+          class="text-center mb-10 fixed md:static bg-[#2825279a] md:bg-transparent overflow-hidden h-[80vh] md:h-auto ml-auto w-[100%] sm:w-[70%] md:w-[100%] top-11 pt-6 right-0 md:block z-20 space-x-4 font-bold text-1xl text-white hidden"></div>
+        <div>
+          <img
+            onclick="showMenuItem()"
+            class="block cursor-pointer text-3xl z-50 fixed top-[55px] w-[40px] right-1 font-bold md:hidden"
+            src="https://img.icons8.com/?size=512&id=TDp6fE6jbWH3&format=png"
+            alt="" />
+      </div>
 
       <!-- Card Container -->
       <div

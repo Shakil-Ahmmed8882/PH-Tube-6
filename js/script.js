@@ -1,11 +1,35 @@
+let isSorted = false;
+
+// sort data
+// Function to handle button click and toggle isSorted
+function sortData(target) {
+  isSorted = !isSorted; // Toggle the value of isSorted
+
+  if (isSorted) {
+    target.classList.remove("bg-primary");
+    target.classList.add("bg-red-400");
+    target.classList.add("text-white");
+  } else {
+    target.classList.remove("bg-red-400");
+    target.classList.add("bg-primary");
+  }
+  console.log(isSorted);
+  getData();
+}
+
 const getData = async (id = 1000) => {
   // getting data from network request
-
   const res = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${id}`
   );
   const data = await res.json();
   let category = data.data;
+  // =======================
+  if (isSorted) {
+    category = category.sort((view1, view2) => {
+      return parseInt(view2.others.views) - parseInt(view1.others.views);
+    });
+  }
 
   //`Display card invocation
   displayCards(category);
@@ -22,34 +46,20 @@ async function showTabButtons() {
   const category = await response.json();
   const buttons = category.data;
 
-  buttonContainer.innerHTML += buttons
+  buttonContainer.innerHTML = buttons
     .map((button) => {
       return `
-      <button id="${button.category}" onclick="getData('${
-        button.category_id
-      }',this)" class="bg-primary mx-auto px-5 py-2 rounded-lg ${
-        button.category === "All" ? "bg-red-400 text-white" : "bg-primary"
-      }">${button.category}</button>
-      
+      <button id="${button.category_id}" onclick="getData('${button.category_id}')"class=" border-none btn  hover:bg-black md:text-black hover:text-white text-white bg-primary">${button.category}</button>
       `;
     })
     .join("");
 }
 
-// ===========================
-
-// //is Data is sorted?
-// let isSorted = false;
-
-// function sortData(isSorted) {
-//   isSorted = true;
-// }
-
-// ========================
 showTabButtons();
+
 // Display cards function
 function displayCards(data) {
-//   data = customSortData(data);
+  //data = customSortData(data);
   const cardContainer = document.querySelector("[card-container]");
 
   cardContainer.innerHTML = data
@@ -110,21 +120,37 @@ function displayCards(data) {
     .join("");
 }
 
-//
-
-getData();
-
+// Is there no content?
 function ZeroContent(isTrue) {
   const noContentParent = document.querySelector("[data-no-content]");
   if (isTrue) {
     noContentParent.innerHTML = `
     <img src="./Icon.png" class=" w-[40%] sm:w-[100px] lg:w-[12%]" />
     <h1
-      class="text-1xl md:text-2xl text-[#393737] lg:text-[25px] font-bold">
-      Oops!! Sorry, There is no content here
+    class="text-1xl md:text-2xl text-[#393737] lg:text-[25px] font-bold">
+    Oops!! Sorry, There is no content here
     </h1>    
     `;
   } else {
     noContentParent.innerHTML = "";
   }
 }
+
+// mobile menu
+function showMenuBar() {
+  const element = document.querySelector("[data-menu-container]");
+  // element.style.display = " grid";
+  element.classList.toggle("hidden");
+  element.classList.toggle("grid");
+  element.classList.toggle("w-[80%]");
+  const xx = document.querySelector("[data-i]");
+  xx.classList.toggle("text-white");
+}
+
+function showMenuItem() {
+  var container = document.querySelector("[data-btn-container]");
+  container.classList.toggle("hidden");
+  container.classList.toggle("grid");
+}
+
+getData();
