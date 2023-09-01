@@ -1,6 +1,9 @@
 let isSorted = false;
 
 // sort data
+// Define a variable to store the clicked id
+var clickedId = "";
+
 // Function to handle button click and toggle isSorted
 function sortData(target) {
   isSorted = !isSorted; // Toggle the value of isSorted
@@ -9,13 +12,31 @@ function sortData(target) {
     target.classList.remove("bg-primary");
     target.classList.add("bg-red-400");
     target.classList.add("text-white");
+
+    const buttonContainerToSort = document.querySelector(
+      "[data-btn-container]"
+    );
+    
+    // Define a click event handler for the button container
+    buttonContainerToSort.addEventListener("click", function (e) {
+      if (e.target && e.target.id) {
+        clickedId = e.target.id; // Store the clicked id
+        // Call getData with the clicked id
+        getData(clickedId);
+      }
+    });
   } else {
     target.classList.remove("bg-red-400");
     target.classList.add("bg-primary");
   }
-  console.log(isSorted);
-  getData();
+
+  // Call getData with the stored clicked id
+  clickedId = clickedId == ""?1000: clickedId;
+
+  getData(clickedId)
 }
+
+
 
 const getData = async (id = 1000) => {
   // getting data from network request

@@ -28,17 +28,17 @@ function customSortData(array) {
 }
 
 
-function sorting(dataArr,isSorted){
-    // Sorting the content
-    let sortedArr;
-    if (isSorted) {
-       sortedArr = dataArr.sort((view1, view2) => {
-     return parseInt(view2.others.views) - parseInt(view1.others.views);
-   });
- }
+// function sorting(dataArr,isSorted){
+//     // Sorting the content
+//     let sortedArr;
+//     if (isSorted) {
+//        sortedArr = dataArr.sort((view1, view2) => {
+//      return parseInt(view2.others.views) - parseInt(view1.others.views);
+//    });
+//  }
 
- console.log('from utilitty: ' + sortedArr)
+//  console.log('from utilitty: ' + sortedArr)
 
- return sortedArr
+//  return sortedArr
 
-}
+// }
