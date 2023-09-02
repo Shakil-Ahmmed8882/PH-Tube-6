@@ -119,7 +119,7 @@ function displayCards(data) {
             ${
               card.others.posted_date
                 ? `<p class='absolute bottom-3 right-2'>
-                        <span class="bg-[#00000072] rounded-[8px] text-[12px] px-3 py-2 text-white font-bold">
+                        <span class="bg-[#00000072] rounded-[8px] text-[12px] px-3 py-2 text-white">
                           ${convertSecondsToTime(card.others.posted_date)}
                         </span>
                       </p>`
