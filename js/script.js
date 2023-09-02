@@ -3,6 +3,7 @@ let isSorted = false;
 // sort data
 // Define a variable to store the clicked id
 var clickedId = "";
+var buttonElement;
 
 // Function to handle button click and toggle isSorted
 function sortData(target) {
@@ -11,13 +12,7 @@ function sortData(target) {
   if (isSorted) {
     // target.classList.toggle("bg-primary");
     target.classList.toggle("bg-red-500");
-    target.classList.remove("text-black");
-
-    // Check if text color is not white before setting it
-    if (!target.classList.contains("text-white")) {
-      target.classList.add("text-white");
-    }
-    // selecting button parent
+    target.classList.toggle("text-white");
     const buttonContainerToSort = document.querySelector(
       "[data-btn-container]"
     );
@@ -26,21 +21,44 @@ function sortData(target) {
     buttonContainerToSort.addEventListener("click", function (e) {
       if (e.target && e.target.id) {
         clickedId = e.target.id;
-        getData(clickedId);
+        buttonElement = e.target;
+        getData(clickedId, buttonElement);
       }
     });
   } else {
     target.classList.remove("bg-red-500");
+    target.classList.remove("text-white");
     target.classList.add("text-black");
   }
 
   // Call getData with the stored clicked id
   clickedId = clickedId == "" ? 1000 : clickedId;
 
-  getData(clickedId);
+  console.log(buttonElement);
+  getData(clickedId, buttonElement);
 }
 
-const getData = async (id = 1000) => {
+// Getting all the data here by fetching
+const getData = async (id = 1000, thisButton) => {
+  const buttonContainerToSort = document.querySelector("[data-btn-container]");
+
+  // =================== Active button ================================
+  const buttonList = buttonContainerToSort.children;
+  const buttonListArray = [...buttonList];
+
+  buttonListArray.forEach((e) => {
+    e.classList.remove("bg-red-400");
+    e.classList.remove("md:text-white");
+    e.classList.add("md:text-black");
+  });
+
+  if (thisButton) {
+    thisButton.classList.toggle("bg-red-400");
+    thisButton.classList.add("text-white");
+    thisButton.classList.remove("md:text-black");
+  }
+  // =================== end Active button functionality here ============
+
   // getting data from network request
   const res = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${id}`
@@ -72,8 +90,15 @@ async function showTabButtons() {
   buttonContainer.innerHTML = buttons
     .map((button) => {
       return `
-      <button id="${button.category_id}" onclick="getData('${button.category_id}')"class="  md:btn  hover:bg-black md:text-black rounded-lg hover:text-white md:px-5 md:py-3 md:-border-[10px] text-white font-bold md:font-normal bg-primary">${button.category}</button>
-      `;
+    <button id="${button.category_id}" onclick="getData('${
+        button.category_id
+      }', this)"
+      class="md:btn hover:bg-red-400 ${
+        button.category_id == 1000 ? "bg-red-400 md:text-white" : "bg-primary"
+      } md:text-black rounded-lg hover:text-white md:px-5 md:py-3 md:-border-[10px] text-white font-bold md:font-normal bg-primary">${
+        button.category
+      }</button>
+    `;
     })
     .join("");
 }
